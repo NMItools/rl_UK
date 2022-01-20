@@ -1,0 +1,39 @@
+(rluk) PS D:\git\rluk\python> python
+
+Python 3.9.6 (tags/v3.9.6:db3ff76, Jun 28 2021, 15:26:21) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> import psycopg2
+>>> conn = psycopg2.connect(test_7,postgres,softdesk,localhost,5434)
+>>> conn = psycopg2.connect(dbname='test_2021', user='postgres', password='softdesk', host='localhost', port='5434')
+>>> conn
+<connection object at 0x00000228587AD7B0; dsn: 'user=postgres password=xxx dbname=test_7 host=localhost port=5434', closed: 0>
+>>> cursor = conn.cursor()
+>>> cursor.execute(f"SELECT COUNT(*) FROM t7.nodesuk;")
+>>> conn.commit()
+>>> cursor
+<cursor object at 0x000002285A5C5F20; closed: 0>
+>>> cursor.fetchone()[0]
+320743
+
+conn = psycopg2.connect(dbname=db_name, user=db_user, password=db_password, host=db_server, port=db_port)
+
+------------
+sqlalchemy
+-------------
+engine = db_connect('localhost', '5434', 'test_2021', 'postgres', 'softdesk')
+
+from sqlalchemy import create_engine
+engine = create_engine(f"postgresql+psycopg2://postgres:softdesk@localhost:5434/test_2021")
+conn = engine.connect()
+
+conn.execute('CREATE EXTENSION postgis')
+query = conn.execute('SELECT COUNT(DISTINCT bmrouteid) FROM t.routelinesuk')
+
+qry=conn.execute(f"SELECT MIN(gid), MAX(gid) FROM t.openroads").fetchone()
+
+tab=conn.execute('SELECT COUNT(*) FROM t7.nodesuk')
+>>> for row in tab:
+...     print(row)
+...
+(320743,)

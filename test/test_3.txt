@@ -1,0 +1,54 @@
+===============================================================================================
+RoutelinesUK v1.0
+Successfully connected to database 'test_pgr' on server 'localhost' !
+-----------------------------------------------------------------------------------------------
+[Creating 'ab_routes' table]
+
+Done!
+-----------------------------------------------------------------------------------------------
+[Creating shortest paths for 420567 pairs of A-B points]
+
+ - Pass 0: 100%|-----------------------------------------------| 10/10 [00:03<00:00,  3.17it/s]
+         : 12071 paths
+ - Pass 1: 100%|-----------------------------------------------| 10/10 [00:00<00:00, 10.51it/s]
+         : 66 paths
+ - Pass 2: 100%|----------------------------------------------| 10/10 [28:00<00:00, 168.07s/it]
+         : 403544 paths
+ - Pass 3: 100%|-----------------------------------------------| 10/10 [00:08<00:00,  1.16it/s]
+         : 1978 paths
+ - Pass 4: 100%|-----------------------------------------------| 10/10 [00:09<00:00,  1.06it/s]
+         : 1947 paths
+ - Pass 5: 100%|-----------------------------------------------| 10/10 [00:01<00:00, 10.00it/s]
+         : 6 paths
+ - Pass 6: 100%|-----------------------------------------------| 10/10 [00:00<00:00, 10.98it/s]
+         : 6 paths
+ - Pass 7: 100%|-----------------------------------------------| 10/10 [00:00<00:00, 10.89it/s]
+         : 7 paths
+ - AB routes successfully calculated:          419625
+   Difference from abnodesuk table:            942
+
+-----------------------------------------------------------------------------------------------
+ - AB routes with valid linestring geometries: 419488
+ - AB routes converge to a point:                78
+   (routes with extreme BUS stops positions)
+ - AB routes with NULL geometry:                 59
+   (nodes on a isolated network, not reachable)
+
+Done!
+-----------------------------------------------------------------------------------------------
+[Creating final route geometries]
+ - Unique ID's for in CIF file:                35511
+ - Incomplete routelines (missing BUS stops):    594
+Done!
+-----------------------------------------------------------------------------------------------
+[Joining route geometries with freq. data and creating final table]
+Done!
+===============================================================================================
+[Exporting final table to RouteLinesUK.shp]
+
+...
+D:\git\rluk\python\rlshp.py:118: UserWarning: Column names longer than 10 characters will be truncated when saved to ESRI Shapefile.
+  gdf.to_file(f"{dir_shp}{shp_out}")
+   Done!
+
+(rluk) PS D:\git\rluk\python>

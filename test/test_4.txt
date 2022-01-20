@@ -1,0 +1,166 @@
+Successfully connected to database 'test' on server 'localhost' !
+===============================================================================================
+[CIF file processing and importing into a database]
+-----------------------------------------------------------------------------------------------
+Preparation of CIF file [D:/Routelines/data/Bus_1.cif] started at 13:58:57
+-----------------------------------------------------------------------------------------------
+CIF file size is 1481.19 MB
+Counting number of lines...
+46748423 lines in the file!
+Reading CIF data into memory : : 48it [00:26,  1.78it/s]
+CIF data imported!
+Finished in 30.4 sec.
+---
+Extracting QB nodes in progress...
+QB nodes extracted: 318009
+Inserting to database...: : 349800it [00:12, 29106.64it/s]
+Done!
+Finished in 54.1 sec.
+---
+Extracting QS (QO,QI,QT) nodes in progress...
+Loading RouteLines1 to Pandas dataframe...
+Loading MainTable to Pandas dataframe...
+RouteLines1 size: 43941745 rows
+MainTable size:   45012641 rows
+Uploading RouteLines1 df to PostgreSQL...
+Uploading 'ts.routelines1_tmp' to PostgreSQL ...: : 89it [02:17,  1.55s/it]
+Uploading 'ts.routelines1_tmp' to PostgreSQL done!
+Uploading MainTable df to PostgreSQL...
+Uploading 'ts.maintable_tmp' to PostgreSQL ...: : 92it [03:33,  2.32s/it]
+Uploading 'ts.maintable_tmp' to PostgreSQL done!
+Finished in 16.3 min.
+---
+Updating 'PTStops_temp'...
+Finished in 0.8 sec.
+---
+Updating RouteLines1 RouteID ...
+Finished in 2.8 min.
+---
+Updating Maintable RouteID...
+Finished in 1.9 min.
+---
+Freq. Calculations for mon...
+Freq. Calculations for tue...
+Freq. Calculations for wed...
+Freq. Calculations for thur...
+Freq. Calculations for fri...
+Freq. Calculations for sat...
+Freq. Calculations for sun...
+Finished in 2.2 min.
+---
+Creation of ABNodes and updating...
+Finished in 24.7 sec.
+---
+[Creation of 'ABNodesUK']
+Preparation of 'abnodesuk' table for shortest path calculations...
+Index creation...
+Done!
+Finished in 4.8 sec.
+---
+[Creation of 'RLFreqUK']
+Finished in 5.0 sec.
+---
+[Creation of 'RoutelinesUK']
+Number of unique route lines generated: 33981
+Finished in 18.2 sec.
+---
+Processing CIF file [D:/Routelines/data/Bus_1.cif] completed in 25.4 minutes.
+===============================================================================================
+(rluk) PS D:\git\rluk\python>
+===============================================================================================
+RoutelinesUK v1.0
+Successfully connected to database 'test' on server 'localhost' !
+===============================================================================================
+[Shapefile import]
+
+ - Reading [D:/Routelines/shp/OpenRd_210304_073025.shp] ...
+   3737245 geometry objects/rows.
+ - Importing SHP: 100%|█████████████████████████████████████████| 5/5 [08:50<00:00, 106.11s/it]
+   Done!
+===============================================================================================
+[Builds a network topology based on the imported geometry information]
+
+-----------------------------------------------------------------------------------------------
+ - Preparing table columns ...
+   Done!
+ - Creating vertices: 100%|███████████████████████████████████| 10/10 [47:22<00:00, 284.21s/it]
+   Done!
+
+(rluk) PS D:\git\rluk\python>
+
+===============================================================================================
+RoutelinesUK v1.0
+Successfully connected to database 'test' on server 'localhost' !
+===============================================================================================
+[Creation of 'nodesuk' help table]
+
+ - Populating nodesuk table with unique BUS stops from CIF data ...
+
+ - POINT geometry creation for BUS nodes with known X and Y coordinates ...
+   Creating POINT: 100%|███████████████████████████████████████| 10/10 [00:05<00:00,  1.86it/s]
+   Unique BUS stops with XY   : 317872
+   Unique BUS stops with no XY: 224 - (this will cause incomplete lines!)
+   The list of unknown BUS stop ID's exported to [D:/Routelines/data/unknown_bus_stops.csv]
+
+ - Calculating nearest GRAPH NODE to a BUS stop ...
+   Nearest NODE  : 100%|███████████████████████████████████████| 10/10 [01:33<00:00,  9.35s/it]
+ - Calculating nearest GRAPH EDGE to a BUS stop ...
+   Nearest EDGE  : 100%|███████████████████████████████████████| 10/10 [00:43<00:00,  4.35s/it]
+ - Update CIRC flag for a GRAPH EDGEs that has the same starting and ending node (circular)...
+ - Calculating distance from BUS stop to the nearest point on GRAPH NODE,
+   as a fraction of total 2d line length ...
+   BUS distance  : 100%|███████████████████████████████████████| 10/10 [00:12<00:00,  1.27s/it]
+Done!
+-----------------------------------------------------------------------------------------------
+[Updating 'abnodesuk' table]
+
+   AB routes with all known BUS stops   : 415197
+   AB routes with unknown BUS stops    : 0 - (ALL coordinates are known!)
+
+ - Update node, edge, fraction, and circ flag values...
+ - Updating: 100%|█████████████████████████████████████████████| 10/10 [00:26<00:00,  2.66s/it]
+ - Update nearest GRAPH NODE values for B stop (when both stops are on the same GRAPH EDGE)...
+ - Updating: 100%|█████████████████████████████████████████████| 10/10 [00:01<00:00,  7.20it/s]
+ - Update buffer size to 1000 meters...
+Done!
+-----------------------------------------------------------------------------------------------
+[Creating 'ab_routes' table]
+
+Done!
+-----------------------------------------------------------------------------------------------
+[Creating shortest paths for 415197 pairs of A-B points]
+
+ - Pass 0: 100%|███████████████████████████████████████████████| 10/10 [00:00<00:00, 31.13it/s]
+         : 11956 paths
+ - Pass 1: 100%|███████████████████████████████████████████████| 10/10 [00:00<00:00, 19.97it/s]
+         : 51 paths
+ - Pass 2: 100%|██████████████████████████████████████████████| 10/10 [29:00<00:00, 174.02s/it]
+         : 398885 paths
+ - Pass 3: 100%|███████████████████████████████████████████████| 10/10 [00:09<00:00,  1.07it/s]
+         : 1893 paths
+ - Pass 4: 100%|███████████████████████████████████████████████| 10/10 [00:10<00:00,  1.05s/it]
+         : 1881 paths
+ - Pass 5: 100%|███████████████████████████████████████████████| 10/10 [00:00<00:00, 10.53it/s]
+         : 8 paths
+ - Pass 6: 100%|███████████████████████████████████████████████| 10/10 [00:00<00:00, 10.85it/s]
+         : 5 paths
+ - Pass 7: 100%|███████████████████████████████████████████████| 10/10 [00:00<00:00, 11.13it/s]
+         : 9 paths
+ - AB routes successfully calculated:            414688
+   AB routes not calculated (unknown BUS stops): 509
+
+-----------------------------------------------------------------------------------------------
+ - AB routes with valid linestring geometries: 414559
+ - AB routes converge to a point:                53
+   (routes with extreme BUS stops positions)
+ - AB routes with NULL geometry:                 76
+   (nodes on a isolated network, not reachable)
+
+Done!
+-----------------------------------------------------------------------------------------------
+[Creating final route geometries]
+Done!
+-----------------------------------------------------------------------------------------------
+[Creating a list of incomplete and missing routeline geometries]
+
+ - Unique routelines in CIF file:                       33981

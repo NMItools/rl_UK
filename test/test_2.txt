@@ -1,0 +1,76 @@
+===============================================================================================
+RoutelinesUK v1.0
+Successfully connected to database 'test_pgr' on server 'localhost' !
+===============================================================================================
+[Creation of 'nodesuk' help table]
+
+ - Populating nodesuk table with unique BUS stops from CIF data ...
+
+ - POINT geometry creation for BUS nodes with known X and Y coordinates ...
+   Creating POINT: 100%|---------------------------------------| 10/10 [00:05<00:00,  1.80it/s]
+   Unique BUS stops with XY   : 320743
+   Unique BUS stops with no XY: 401 - (this will cause incomplete lines!)
+
+ - Calculating nearest GRAPH NODE to a BUS stop ...
+   Nearest NODE  : 100%|---------------------------------------| 10/10 [02:02<00:00, 12.30s/it]
+ - Calculating nearest GRAPH EDGE to a BUS stop ...
+   Nearest EDGE  : 100%|---------------------------------------| 10/10 [00:47<00:00,  4.73s/it]
+ - Update CIRC flag for a GRAPH EDGEs that has the same starting and ending node (circular)...
+ - Calculating distance from BUS stop to the nearest point on GRAPH NODE,
+   as a fraction of total 2d line length ...
+   BUS distance  : 100%|---------------------------------------| 10/10 [00:13<00:00,  1.31s/it]
+Done!
+-----------------------------------------------------------------------------------------------
+[Updating 'abnodesuk' table]
+
+   A-B routes with all known BUS stops   : 419625
+   A-B routes with unknown BUS stops     : 942 - (this will cause incomplete lines!)
+
+ - Update node, edge, fraction, and circ flag values...
+ - Updating: 100%|---------------------------------------------| 10/10 [00:27<00:00,  2.76s/it]
+ - Update nearest GRAPH NODE values for B stop (when both stops are on the same GRAPH EDGE)...
+ - Updating: 100%|---------------------------------------------| 10/10 [00:01<00:00,  7.08it/s]
+ - Update buffer size to 2000 meters...
+Done!
+-----------------------------------------------------------------------------------------------
+[Creating 'ab_routes' table]
+
+Done!
+-----------------------------------------------------------------------------------------------
+[Creating shortest paths for 420567 pairs of A-B points]
+
+ - Pass 0: 100%|-----------------------------------------------| 10/10 [00:00<00:00, 33.71it/s]
+         : 12071 paths
+ - Pass 1: 100%|-----------------------------------------------| 10/10 [00:00<00:00, 25.96it/s]
+         : 66 paths
+ - Pass 2: 100%|----------------------------------------------| 10/10 [43:38<00:00, 261.88s/it]
+         : 403553 paths
+ - Pass 3: 100%|-----------------------------------------------| 10/10 [00:07<00:00,  1.28it/s]
+         : 1982 paths
+ - Pass 4: 100%|-----------------------------------------------| 10/10 [00:08<00:00,  1.17it/s]
+         : 1949 paths
+ - Pass 5: 100%|-----------------------------------------------| 10/10 [00:00<00:00, 48.21it/s]
+         : 6 paths
+ - Pass 6: 100%|-----------------------------------------------| 10/10 [00:00<00:00, 48.48it/s]
+         : 7 paths
+419634 (A->B) routes successfully calculated !
+(933 missing)
+
+419359 (A->B) routes with valid linestring geometries!
+78 (A->B) routes converge to a point (route not sensible - BUS stops extremely far from roads)
+172 (A->B) routes has no geometry (increase buffer in meters for route calculations?)
+
+-----------------------------------------------------------------------------------------------
+35511 unique route lines generated.
+594 incomplete route lines with gaps (missing BUS stops!): 
+-----------------------------------------------------------------------------------------------
+[Creating final route geometries]
+-----------------------------------------------------------------------------------------------
+[Joining route geometries with freq. data and creating final table]
+===============================================================================================
+[Exporting final table to RouteLinesUK.shp]
+
+...
+D:\git\rluk\python\rlshp.py:117: UserWarning: Column names longer than 10 characters will be truncated when saved to ESRI Shapefile.
+  gdf.to_file(f"{dir_shp}{shp_out}")
+   Done!
