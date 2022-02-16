@@ -4,7 +4,7 @@ RoutelinesUK command-line tool written in Python and is working with data in Pos
 
 Description
 ---
-'RoutelinesUK' is a command-line tool in Python for calculating the shortest path between BUS stop sequences in the UK. As input files, it uses an ATCO-CIF file and 'OS Open Roads' dataset from [Ordnance Survey Data Hub](https://osdatahub.os.uk/downloads/open/OpenRoads). 
+'RoutelinesUK' is a command-line tool in Python for calculating the full BUS routes using shortest path calculation between BUS stop sequences in the UK and joining it with  matadata related to a BUS route (schedules, etc.). As input files, it uses an ATCO-CIF file and 'OS Open Roads' dataset from [Ordnance Survey Data Hub](https://osdatahub.os.uk/downloads/open/OpenRoads). 
 
 ## ATCO-CIF
 
