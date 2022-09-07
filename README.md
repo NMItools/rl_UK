@@ -1,6 +1,6 @@
 Description
 ---
-'RoutelinesUK'  (https://www.basemap.co.uk/map-data/route-lines/) is a command-line tool in Python for calculating the full BUS routes using shortest path calculation between BUS stop sequences in the UK and joining it with  matadata related to a BUS route (schedules, etc.). As input files, it uses an ATCO-CIF file and 'OS Open Roads' dataset from [Ordnance Survey Data Hub](https://osdatahub.os.uk/downloads/open/OpenRoads) which is imported into PostgreSQL database. The tool is using PostGIS/pgRouting extensions for PostgreSQL.
+'RoutelinesUK' is a command-line tool in Python for calculating the full BUS routes using shortest path calculation between BUS stop sequences in the UK and joining it with  matadata related to a BUS route (schedules, etc.). As input files, it uses an ATCO-CIF file and 'OS Open Roads' dataset from [Ordnance Survey Data Hub](https://osdatahub.os.uk/downloads/open/OpenRoads) which is imported into PostgreSQL database. The tool is using PostGIS/pgRouting extensions for PostgreSQL.
 
 ## ATCO-CIF
 
